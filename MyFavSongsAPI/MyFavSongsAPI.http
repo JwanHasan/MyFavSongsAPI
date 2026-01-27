@@ -1,0 +1,6 @@
+@MyFavSongsAPI_HostAddress = http://localhost:5250
+
+GET {{MyFavSongsAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

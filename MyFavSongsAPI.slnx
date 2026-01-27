@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="EFDatabase/EFDatabase.csproj" Id="2a951268-bbc0-456c-a2ff-8fad6873097b" />
+  <Project Path="MyFavSongsAPI/MyFavSongsAPI.csproj" />
+  <Project Path="Shared/Shared.csproj" Id="bda5cd83-ef8d-422b-ad29-d1b8f1b8f3b5" />
+</Solution>
