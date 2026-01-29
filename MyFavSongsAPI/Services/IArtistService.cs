@@ -1,5 +1,7 @@
 ﻿
 
+using Shared.Entities;
+
 namespace MyFavSongsAPI.Services
 {
     public interface IArtistService

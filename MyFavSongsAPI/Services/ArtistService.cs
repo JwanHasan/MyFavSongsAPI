@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http.HttpResults;
-using MyFavSongsAPI.Entities;
+using Shared.Entities;
 using System.Net.Mail;
 using System.Runtime.CompilerServices;
 

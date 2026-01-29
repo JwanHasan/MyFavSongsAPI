@@ -1,4 +1,4 @@
-using MyFavSongsAPI.EF;
+using EFDatabase.EF;
 using MyFavSongsAPI.Services;
 
 var builder = WebApplication.CreateBuilder(args);
