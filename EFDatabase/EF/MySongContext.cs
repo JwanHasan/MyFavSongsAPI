@@ -1,5 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Shared.Entities;
+﻿using EFDatabase.Moduls;
+using Microsoft.EntityFrameworkCore;
+
 
 namespace EFDatabase.EF
 {
