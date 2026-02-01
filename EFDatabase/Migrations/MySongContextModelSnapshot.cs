@@ -16,15 +16,14 @@ namespace EFDatabase.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "10.0.0");
 
-            modelBuilder.Entity("Shared.Entities.Album", b =>
+            modelBuilder.Entity("EFDatabase.Moduls.Album", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("ArtistName")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
+                    b.Property<int>("ArtistId")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -32,10 +31,12 @@ namespace EFDatabase.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ArtistId");
+
                     b.ToTable("Albums");
                 });
 
-            modelBuilder.Entity("Shared.Entities.Artist", b =>
+            modelBuilder.Entity("EFDatabase.Moduls.Artist", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -50,18 +51,20 @@ namespace EFDatabase.Migrations
                     b.ToTable("Artists");
                 });
 
-            modelBuilder.Entity("Shared.Entities.Song", b =>
+            modelBuilder.Entity("EFDatabase.Moduls.Song", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("AlbumId")
+                    b.Property<int>("AlbumId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Artist")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
+                    b.Property<int>("AlbumsId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("ArtistId")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -71,19 +74,51 @@ namespace EFDatabase.Migrations
 
                     b.HasIndex("AlbumId");
 
+                    b.HasIndex("ArtistId");
+
                     b.ToTable("Songs");
                 });
 
-            modelBuilder.Entity("Shared.Entities.Song", b =>
+            modelBuilder.Entity("EFDatabase.Moduls.Album", b =>
                 {
-                    b.HasOne("Shared.Entities.Album", null)
-                        .WithMany("Songs")
-                        .HasForeignKey("AlbumId");
+                    b.HasOne("EFDatabase.Moduls.Artist", "Artist")
+                        .WithMany("albums")
+                        .HasForeignKey("ArtistId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Artist");
                 });
 
-            modelBuilder.Entity("Shared.Entities.Album", b =>
+            modelBuilder.Entity("EFDatabase.Moduls.Song", b =>
+                {
+                    b.HasOne("EFDatabase.Moduls.Album", "Album")
+                        .WithMany("Songs")
+                        .HasForeignKey("AlbumId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("EFDatabase.Moduls.Artist", "Artist")
+                        .WithMany("songs")
+                        .HasForeignKey("ArtistId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Album");
+
+                    b.Navigation("Artist");
+                });
+
+            modelBuilder.Entity("EFDatabase.Moduls.Album", b =>
                 {
                     b.Navigation("Songs");
+                });
+
+            modelBuilder.Entity("EFDatabase.Moduls.Artist", b =>
+                {
+                    b.Navigation("albums");
+
+                    b.Navigation("songs");
                 });
 #pragma warning restore 612, 618
         }
