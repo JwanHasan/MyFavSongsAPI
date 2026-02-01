@@ -5,17 +5,19 @@ using Microsoft.EntityFrameworkCore;
 
 
 var context = new MySongContext();
-
+await context.Database.EnsureCreatedAsync();
 
 var artist = new Artist {  Name = "jack" };
 
- context.Artists.Add(artist);
- context.SaveChanges();
+ await context.Artists.AddAsync(new Artist { Name = "Blalalala" });
+    
+
+await context.SaveChangesAsync();
 
 var list = context.Artists.ToList();
 
 foreach(var item in list)
 {
-    Console.WriteLine(item.Name+ "fdhædfhpdfhådhdh"+item.Id);
+    Console.WriteLine("the name is: "+item.Name+ "  The Id is:  " +item.Id);
 }
 

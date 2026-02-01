@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EFDatabase.Migrations
 {
     [DbContext(typeof(MySongContext))]
-    [Migration("20260201203922__migraskngdgnwsgswgsdg")]
+    [Migration("20260201210439__migraskngdgnwsgswgsdg")]
     partial class _migraskngdgnwsgswgsdg
     {
         /// <inheritdoc />

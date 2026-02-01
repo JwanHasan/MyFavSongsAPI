@@ -8,7 +8,7 @@ namespace EFDatabase.Moduls
 {
     public class Album
     {
-        public int Id { get; set; }
+        public int Id { get; set; } 
         
         public required string Name { get; set; }
 
