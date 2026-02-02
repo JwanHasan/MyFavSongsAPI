@@ -25,7 +25,11 @@ builder.Services.AddHttpClient<IArtistService>(client =>
 
 
 
+builder.Services.AddScoped<IArtistService, ArtistService>();
+builder.Services.AddScoped<ISongService, SongService>();
+builder.Services.AddScoped<IAlbumService, AlbumService>();
 
+builder.Services.AddDbContext<MySongContext>();
 
 
 var app = builder.Build();

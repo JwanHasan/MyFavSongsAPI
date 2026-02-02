@@ -16,7 +16,7 @@ namespace EFDatabase.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "10.0.0");
 
-            modelBuilder.Entity("EFDatabase.Moduls.Album", b =>
+            modelBuilder.Entity("Shared.Entities.Album", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -24,6 +24,10 @@ namespace EFDatabase.Migrations
 
                     b.Property<int>("ArtistId")
                         .HasColumnType("INTEGER");
+
+                    b.Property<string>("ArtistName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -36,7 +40,7 @@ namespace EFDatabase.Migrations
                     b.ToTable("Albums");
                 });
 
-            modelBuilder.Entity("EFDatabase.Moduls.Artist", b =>
+            modelBuilder.Entity("Shared.Entities.Artist", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -51,7 +55,7 @@ namespace EFDatabase.Migrations
                     b.ToTable("Artists");
                 });
 
-            modelBuilder.Entity("EFDatabase.Moduls.Song", b =>
+            modelBuilder.Entity("Shared.Entities.Song", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -79,9 +83,9 @@ namespace EFDatabase.Migrations
                     b.ToTable("Songs");
                 });
 
-            modelBuilder.Entity("EFDatabase.Moduls.Album", b =>
+            modelBuilder.Entity("Shared.Entities.Album", b =>
                 {
-                    b.HasOne("EFDatabase.Moduls.Artist", "Artist")
+                    b.HasOne("Shared.Entities.Artist", "Artist")
                         .WithMany("albums")
                         .HasForeignKey("ArtistId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -90,15 +94,15 @@ namespace EFDatabase.Migrations
                     b.Navigation("Artist");
                 });
 
-            modelBuilder.Entity("EFDatabase.Moduls.Song", b =>
+            modelBuilder.Entity("Shared.Entities.Song", b =>
                 {
-                    b.HasOne("EFDatabase.Moduls.Album", "Album")
+                    b.HasOne("Shared.Entities.Album", "Album")
                         .WithMany("Songs")
                         .HasForeignKey("AlbumId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("EFDatabase.Moduls.Artist", "Artist")
+                    b.HasOne("Shared.Entities.Artist", "Artist")
                         .WithMany("songs")
                         .HasForeignKey("ArtistId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -109,12 +113,12 @@ namespace EFDatabase.Migrations
                     b.Navigation("Artist");
                 });
 
-            modelBuilder.Entity("EFDatabase.Moduls.Album", b =>
+            modelBuilder.Entity("Shared.Entities.Album", b =>
                 {
                     b.Navigation("Songs");
                 });
 
-            modelBuilder.Entity("EFDatabase.Moduls.Artist", b =>
+            modelBuilder.Entity("Shared.Entities.Artist", b =>
                 {
                     b.Navigation("albums");
 

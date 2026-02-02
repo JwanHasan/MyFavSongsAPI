@@ -1,13 +1,11 @@
-﻿using EFDatabase.Moduls;
+﻿ 
 using Microsoft.EntityFrameworkCore;
+using Shared.Entities;
 
 
 namespace EFDatabase.EF
 {
 
-
-
-    
     public class MySongContext:DbContext
     {
 
