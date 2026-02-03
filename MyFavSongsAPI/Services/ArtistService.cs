@@ -39,14 +39,35 @@ namespace MyFavSongsAPI.Services
             return  result;
         }
 
-        public Task<Artist> UpdateArtistByIdAsync(int id, Artist artist)
+        public async Task<Artist> UpdateArtistByIdAsync(int id, Artist artist)
         {
-            
+            var result = await _service.Artists.FirstOrDefaultAsync(x => x.Id == id);
+            if (result != null)
+            {
+                result.Name = artist.Name;
+                result.songs = artist.songs;
+                result.albums = artist.albums;
+                await _service.SaveChangesAsync();
+            }
+            else throw new Exception($"the artist with id: {id} is not found ");
+
+            return await  Task.FromResult(result);
         }
 
-        public Task<bool> DeleteArtistByIdAsync(int id)
+        public async Task<bool> DeleteArtistByIdAsync(int id)
         {
-            throw new NotImplementedException();
+           
+            var artist = await _service.Artists.FindAsync(id);
+
+            if (artist == null)
+                return false;
+
+            _service.Artists.Remove(artist);
+            await _service.SaveChangesAsync();
+
+            return true;
         }
+
+    
     }
 }
