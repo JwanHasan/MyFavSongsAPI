@@ -3,6 +3,7 @@ using Shared.Entities;
 using System.Net.Mail;
 using System.Runtime.CompilerServices;
 using EFDatabase.EF;
+using Microsoft.EntityFrameworkCore;
 
 namespace MyFavSongsAPI.Services
 {
@@ -24,19 +25,23 @@ namespace MyFavSongsAPI.Services
            return artist;
         }
 
-        public Task<List<Artist>> GetAllArtistAsync()
+        public async Task<List<Artist>> GetAllArtistAsync()
         {
-            throw new NotImplementedException();
+            var list =  await _service.Artists.ToListAsync();
+            return list;
         }
 
-        public Task<Artist> GetArtistByIDAsync(int id)
+        public async Task<Artist> GetArtistByIDAsync(int id)
         {
-            throw new NotImplementedException();
+            var result= await _service.Artists.FirstOrDefaultAsync(x => x.Id == id);
+            if (result == null)
+                throw new Exception($"the artist with id: {id} is not found ");
+            return  result;
         }
 
         public Task<Artist> UpdateArtistByIdAsync(int id, Artist artist)
         {
-            throw new NotImplementedException();
+            
         }
 
         public Task<bool> DeleteArtistByIdAsync(int id)
