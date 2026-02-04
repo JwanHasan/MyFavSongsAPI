@@ -18,11 +18,14 @@ namespace MyFavSongsAPI.Services
         {
             _service = context;
         }
-        public async Task<Artist?> CreateArtistAsync(Artist artist)
+        public async Task<Artist?> CreateArtistAsync(string name)
         {
-           await _service.Artists.AddAsync(new Artist() { Name = artist.Name });
+           await _service.Artists.AddAsync(new Artist() { Name = name });
            await _service.SaveChangesAsync();
-           return artist;
+            var list =  await _service.Artists.ToListAsync();
+            var result= list.Find(a=>a.Name==name);
+
+           return result;
         }
 
         public async Task<List<Artist>> GetAllArtistAsync()
@@ -39,14 +42,13 @@ namespace MyFavSongsAPI.Services
             return  result;
         }
 
-        public async Task<Artist> UpdateArtistByIdAsync(int id, Artist artist)
+        public async Task<Artist> UpdateArtistByIdAsync(int id, string name)
         {
             var result = await _service.Artists.FirstOrDefaultAsync(x => x.Id == id);
             if (result != null)
             {
-                result.Name = artist.Name;
-                result.songs = artist.songs;
-                result.albums = artist.albums;
+                result.Name = name;
+                
                 await _service.SaveChangesAsync();
             }
             else throw new Exception($"the artist with id: {id} is not found ");
