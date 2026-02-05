@@ -11,12 +11,15 @@ namespace MyFavSongsAPI.Services
     public class ArtistService: IArtistService
 
     {
-        private  MySongContext _service;
+        private readonly MySongContext _service;
+
+        private readonly HttpClient _httpClient;
         
 
-        public ArtistService(MySongContext context)
+        public ArtistService(MySongContext context, HttpClient client)
         {
             _service = context;
+            _httpClient = client;
         }
         public async Task<Artist?> CreateArtistAsync(string name)
         {
