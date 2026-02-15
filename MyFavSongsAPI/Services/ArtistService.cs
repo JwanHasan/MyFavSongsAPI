@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace MyFavSongsAPI.Services
 {
-     
+     // need confirm that everything is working otherwise it goes to testing again 
     public class ArtistService: IArtistService
 
     {
